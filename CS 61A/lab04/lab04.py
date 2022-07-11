@@ -55,14 +55,14 @@ def insert_items(lst, entry, elem):
     True
     """
     "*** YOUR CODE HERE ***"
-    list = []
-    for i in lst:
-        if i == entry:
-            list.append(i)
-            list.append(elem)
+    i = 0
+    while(i < len(lst)):
+        if lst[i] == entry:
+            lst.insert(i+1, elem)
+            i = i+2
         else:
-            list.append(i)
-    return list
+            i = i+1
+    return lst
 
 
 class Minty:
@@ -98,6 +98,7 @@ class Minty:
 
     def update(self):
         "*** YOUR CODE HERE ***"
+        self.year = self.present_year
 
 
 class Coin:
@@ -105,9 +106,15 @@ class Coin:
 
     def __init__(self, year, type):
         "*** YOUR CODE HERE ***"
+        self.year = year
+        self.type = type
 
     def worth(self):
         "*** YOUR CODE HERE ***"
+        if self.year == Minty.present_year:
+            return self.cents
+        else:
+            return self.cents + Minty.present_year - self.year - 50
 
 
 def couple(s, t):
@@ -131,11 +138,6 @@ def couple(s, t):
         exr.append(t[i])
         new.append(exr)
     return new
-
-
-a = [1, 2, 3]
-b = [4, 5, 6]
-print(couple(a, b))
 
 
 def change_abstraction(change):
